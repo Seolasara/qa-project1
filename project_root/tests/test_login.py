@@ -5,17 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
-@pytest.fixture
-def driver():
-    """크롬 드라이버 기본 세팅"""
-    driver = webdriver.Chrome()
-    driver.maximize_window()
-    driver.implicitly_wait(5)
-    yield driver
-    driver.quit()
-
-
 def test_helpychat_login(driver):
     """HelpyChat 로그인 자동화 테스트"""
     # 1️⃣ 로그인 페이지 접속

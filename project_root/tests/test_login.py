@@ -13,10 +13,7 @@ def test_helpychat_login(driver):
     )
 
     # 2️⃣ 이메일 입력
-    id_field = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, '//input[@type="email" or @id=":r0:"]'))
-    )
-    id_field.click()
+    id_field = driver.find_element(By.ID, ":r0:")
     id_field.send_keys("wivepam991@fandoe.com")
 
     # 3️⃣ 비밀번호 필드 선택
@@ -37,10 +34,11 @@ def test_helpychat_login(driver):
     input.dispatchEvent(new InputEvent('input', { bubbles: true }));
     input.dispatchEvent(new Event('change', { bubbles: true }));
     """, pw_field, password)
+   
 
     # 5️⃣ 로그인 버튼 클릭
-    login_btn = driver.find_element(By.XPATH, '//button[@type="submit" or @id=":r3:"]')
-    login_btn.click()
+    login_button = driver.find_element(By.ID, ":r3:")
+    login_button.click()
 
     # 6️⃣ 페이지 이동 대기
     time.sleep(10)

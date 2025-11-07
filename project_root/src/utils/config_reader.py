@@ -2,12 +2,20 @@ import configparser
 import os
 
 def read_config(section="helpychat"):
-    config = configparser.ConfigParser() #파일을 딕셔너리처럼 만들어줌
-    base_path = os.path.dirname(os.path.dirname(__file__)) #경로 올바르게 찾아주는 코드
+
+    config = configparser.ConfigParser()
+
+    # 현재 파일 기준으로 project_root/src/config/config.ini 경로 지정
+    base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     config_path = os.path.join(base_path, "config", "config.ini")
 
-    config.read(config_path, encoding="utf-8")
-    if section not in config: #명시적 에러
-        raise KeyError(f"Section '{section}' not found in config.ini")
+    # 파일을 직접 열어서 BOM 제거 후 파싱
+    with open(config_path, "r", encoding="utf-8-sig") as f:
+        config.read_file(f)
 
-    return dict(config[section]) #딕셔너리 형태로 반환
+    if not config.has_section(section):
+        available = config.sections()
+        raise KeyError(
+            f"❌ Section '{section}' not found in {config_path}\n"
+        )
+    return dict(config[section])

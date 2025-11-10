@@ -34,20 +34,3 @@ class HelpyChatPage:
 
         # 업로드 완료 대기
         self.wait.until(EC.presence_of_element_located((By.TAG_NAME, "img")))
-
-    def send_message(self, message: str):
-
-        # 메시지 입력창 찾기
-        textarea = self.wait.until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "textarea[placeholder='메시지를 입력하세요...']"))
-        )
-        textarea.send_keys(message)
-
-        # 전송 버튼 클릭 (arrow-up 아이콘)
-        send_button = self.wait.until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "button#chat-submit svg[data-icon='arrow-up']"))
-        )
-        self.driver.execute_script("arguments[0].closest('button').click();", send_button)
-
-        # AI 응답 대기
-        time.sleep(3)

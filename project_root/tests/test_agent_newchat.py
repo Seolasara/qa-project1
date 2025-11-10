@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from src.pages.login_page import LoginPage
 from src.pages.agent_page import AgentPage
 
-def test_HIST018_agent_btn(driver,login) :
+def test_HIST025_agent_btn(driver,login) :
 
     # 에이전트 페이지 접속
     agent_page = AgentPage(driver)

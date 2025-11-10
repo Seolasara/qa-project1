@@ -1,3 +1,10 @@
 .DS_Store
 project_root/src/utils/__pycache__/__init__.cpython-314.pyc
 project_root/src/utils/__pycache__/config_reader.cpython-314.pyc
+project_root/src/__pycache__/__init__.cpython-314.pyc
+project_root/src/pages/__pycache__/__init__.cpython-314.pyc
+project_root/src/pages/__pycache__/login_page.cpython-314.pyc
+project_root/src/utils/__pycache__/__init__.cpython-314.pyc
+project_root/src/utils/__pycache__/config_reader.cpython-314.pyc
+project_root/tests/__pycache__/test_history_list.cpython-314-pytest-8.4.2.pyc
+project_root/src/__pycache__/__init__.cpython-314.pyc

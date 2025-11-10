@@ -4,8 +4,10 @@ import logging
 import os
 from datetime import datetime
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import time
 from src.pages.login_page import LoginPage
+from selenium.webdriver.support.ui import WebDriverWait
 from src.pages.agent_page import AgentPage
 
 
@@ -30,6 +32,7 @@ def send_test_message(driver):
         driver.find_element(By.ID, "chat-submit").click()
         time.sleep(3)
     return _create_chat
+
 
 @pytest.fixture
 def login(driver):

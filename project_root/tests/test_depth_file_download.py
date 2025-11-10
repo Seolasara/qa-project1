@@ -8,19 +8,14 @@ from src.utils.config_reader import read_config
 
 
 def test_CADV027_CADV028_deep_investigation_request(driver, login, click_plus, send_test_message):
-    """
-    ✅ 심층 조사 기능 테스트 + 마크다운/한글파일 다운로드 검증
-       (+ 버튼 → 심층 조사 선택 → 메시지 입력 → 시작 → '조사 완료' 확인 → 마크다운 & 한글파일 다운로드)
-    """
+    """심층 조사 기능 테스트 + 마크다운/한글파일 다운로드 검증"""
 
     config = read_config("helpychat")
     base_url = config["base_url"]
     driver.get(base_url)
     wait = WebDriverWait(driver, 15)
-
-    # 1️⃣ + 버튼 클릭
+    
     click_plus()
-    print("➕ '+ 버튼' 클릭 완료")
 
     # 2️⃣ '심층 조사' 버튼 클릭
     deep_investigation_btn = wait.until(

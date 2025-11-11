@@ -4,8 +4,11 @@ import logging
 import os
 from datetime import datetime
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 import time
 from src.pages.login_page import LoginPage
+from selenium.webdriver.support.ui import WebDriverWait
+#from src.pages.agent_page import AgentPage
 
 
 @pytest.fixture(scope="function")
@@ -30,6 +33,7 @@ def send_test_message(driver):
         time.sleep(3)
     return _create_chat
 
+
 @pytest.fixture
 def login(driver):
     """HelpyChat 로그인 fixture"""
@@ -38,3 +42,32 @@ def login(driver):
     login_page.login()
     time.sleep(3)
     return login_page
+
+def click_plus(driver):
+    """HelpyChat의 '+ 버튼' 클릭 """
+    wait = WebDriverWait(driver, 15)
+
+    def _click():
+        # + 버튼 대기 및 클릭
+        plus_button = wait.until(
+            EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, "button[aria-haspopup='true'] svg[data-icon='plus']")
+            )
+        )
+        # svg 대신 부모 <button> 클릭
+        driver.execute_script("arguments[0].closest('button').click();", plus_button)
+        time.sleep(1)
+
+    return _click
+
+
+# @pytest.fixture
+# def new_agent(driver):
+#     """로그인 후 커스텀 에이전트 생성 페이지로 이동한 상태를 반환"""
+#     login_page = LoginPage(driver)
+#     login_page.page_open()
+#     login_page.login()
+
+#     agent_page = AgentPage(driver)
+#     agent_page.agent_create()
+#     return agent_page

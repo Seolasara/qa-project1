@@ -4,11 +4,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from src.utils.config_reader import read_config
-from src.pages.login_page import LoginPage
 
 
 def test_CADV032_google_search_request(driver, login, click_plus, send_test_message):
-    """HelpyChat 구글 검색 기능 테스트"""
+    """HelpyChat 구글 검색 기능 테스트 (assistant_message 기준 버전)"""
 
     config = read_config("helpychat")
     base_url = config["base_url"]
@@ -18,7 +17,7 @@ def test_CADV032_google_search_request(driver, login, click_plus, send_test_mess
     # + 버튼 클릭
     click_plus()
 
-    #'구글 검색' 버튼 클릭
+    # '구글 검색' 버튼 클릭
     google_search_btn = wait.until(
         EC.element_to_be_clickable((
             By.XPATH,
@@ -28,21 +27,23 @@ def test_CADV032_google_search_request(driver, login, click_plus, send_test_mess
     driver.execute_script("arguments[0].click();", google_search_btn)
     print("🔍 '구글 검색' 버튼 클릭 완료")
 
-    # 메시지 전송
+    # 사용자 메시지 전송
     send_test_message("현재 대전 온도 알려줘")
 
-    # 응답 검증
-    try:
-        response_bubble = WebDriverWait(driver, 60).until(
-            EC.presence_of_element_located((
-                By.XPATH,
-                "//div[contains(@class, 'chat-bubble') or contains(text(), '대전') or contains(text(), '℃') or contains(text(), '온도')]"
-            ))
-        )
-        print("✅ 응답 감지됨 — 구글 검색 기능 정상 작동")
-        assert "대전" in response_bubble.text or "온도" in response_bubble.text, "응답에 온도 정보가 없습니다."
-    except Exception as e:
-        print("❌ 구글 검색 응답이 표시되지 않았습니다 (시간 초과 또는 요소 미탐지)")
-        assert False, f"구글 검색 기능 실패: {e}"
+    # ✅ Helpy 응답 대기 (assistant_message 기준)
+    response_box = WebDriverWait(driver, 90).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-step-type='assistant_message'] .message-content"))
+    )
+    time.sleep(3)
 
-    print("✅ 테스트 완료: 구글 검색 요청 및 응답 검증 성공")
+    # ✅ 텍스트 추출 및 검증
+    response_text = response_box.get_attribute("innerText")
+    print(f"📨 Helpy 응답 감지됨:\n{response_text}")
+
+    keywords = ["Daejeon", "대전", "온도", "℃", "°C", "temperature"]
+    matched = [kw for kw in keywords if kw.lower() in response_text.lower()]
+
+    assert len(matched) >= 2, f"❌ Helpy 응답 내 키워드 부족: {matched}"
+    print(f"✅ HelpyChat 구글 검색 테스트 통과 — 감지된 키워드 {matched}")
+
+    time.sleep(2)

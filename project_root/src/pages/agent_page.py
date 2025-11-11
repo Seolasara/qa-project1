@@ -56,10 +56,6 @@ class AgentPage:
         el.clear()
         el.send_keys(msg)
 
-    # 파일 업로드
-    def upload_file(self, file_path):
-        self.driver.find_element(*self.file_field).send_keys(file_path)
-
     # 기능 체크박스 클릭(단일)
     def checkbox_function(self, function):
         checkbox_map = {

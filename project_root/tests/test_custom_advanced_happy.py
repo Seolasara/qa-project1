@@ -71,45 +71,46 @@ def test_CSTM011_large_image(new_agent):
 
     # --- 모든 기능 설정한 에이전트 생성 --- 
 def test_CSTM013_with_all_functions(new_agent):
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    image_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
+    file_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
 
     # 1. 이미지 업로드
     WebDriverWait(new_agent.driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
-    file_input = WebDriverWait(new_agent.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
+    image_input = WebDriverWait(new_agent.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
     assert os.path.exists(image_path), f"[FAIL] 파일 없음: {image_path}"
 
-    file_input.send_keys(image_path)
+    image_input.send_keys(image_path)
     image = WebDriverWait(new_agent.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
 
     assert image.is_displayed(), "[FAIL] 이미지 업로드 실패"
     print("✅ [PASS] 이미지 업로드 성공") 
-    time.sleep(3)
 
     # 2. 입력 필드 이름/한줄 소개/규칙/시작대화 입력 
     new_agent.set_name("테스트2")
-    time.sleep(3)
-    new_agent.set_description("테스트2")
-    time.sleep(3)
+    time.sleep(1)
+    # new_agent.set_description("테스트2")
     new_agent.set_rules("테스트2")
-    time.sleep(3)
     new_agent.set_start_message("테스트2")
 
     # 3. 파일 업로드(1번과 같은 파일)
-    # WebDriverWait(new_agent.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//label[text()='파일 업로드']")))
-    # file_input = WebDriverWait(new_agent.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']")))
-    # project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # image_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
-    # assert os.path.exists(image_path), f"[FAIL] 파일 없음: {image_path}"
+    WebDriverWait(new_agent.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "label input[type='file']")))
+    file_input = WebDriverWait(new_agent.driver, 10).until(EC.presence_of_element_located((By.XPATH, "(//input[@type='file'])[2]")))
+    assert os.path.exists(file_path), f"[FAIL] 파일 없음: {file_path}"
 
-    # file_input.send_keys(image_path)
-    # image = WebDriverWait(new_agent.driver, 20).until(EC.visibility_of_element_located((By.XPATH, "//p[text()='20.5mb.jpg']")))
+    file_input.send_keys(file_path)
+    file = WebDriverWait(new_agent.driver, 20).until(EC.visibility_of_element_located((By.XPATH, "//p[text()='20.5mb.jpg']")))
 
-    # assert image_label.is_displayed(), "[FAIL] 파일 업로드 실패"
-    # print("✅ [PASS] 파일 업로드 성공")
+    assert file.is_displayed(), "[FAIL] 파일 업로드 실패"
+    print("✅ [PASS] 파일 업로드 성공")
 
     # 4. 기능 전체 선택
     new_agent.checkbox_functions("search", "browsing", "image", "execution")
+
+    checkboxes = [new_agent.search_function, new_agent.browsing_function, new_agent.image_function, new_agent.execution_function]
+    for box in checkboxes:
+        assert new_agent.driver.find_element(*box).is_selected()
+    print("✅ [PASS] 모든 기능 체크박스 선택 완료")
     
     # 5. 만들기/저장 클릭
     new_agent.click_create()

@@ -57,5 +57,5 @@ def test_CSTM021_my_agent(driver, login):
     print(f"\n🟢 첫 번째 에이전트 이름: {first_agent_name}")
     print(f"🔵 마지막 에이전트 이름: {last_agent_name}")
 
-    assert last_agent_name is not None, "⛔ [FAIL] 에이전트 이름을 불러오지 못했습니다."
-    print("\n✅ [PASS] 에이전트 이름 확인 성공")
+    assert last_agent_name is not None, "⛔ [FAIL] 에이전트 이름 확인 실패"
+    print("✅ [PASS] 에이전트 이름 확인 성공")

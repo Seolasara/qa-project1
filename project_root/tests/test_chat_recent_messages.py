@@ -88,4 +88,3 @@ def test_CBAS074_chat_basic(driver, login, send_test_message):
 
     # assert is_visible, "⛔ [FAIL] 최근 메시지로 자동 스크롤 이동 실패"
     # print("✅ [PASS] 최근 메시지 보기 확인 완료")
-    

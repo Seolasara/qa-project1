@@ -86,7 +86,7 @@ def test_CBAS037_ans_dislike(driver, login, send_test_message):
 
     # 싫어요 버튼 색상 검정색 적용 확인
     if "text-red-600" not in dislike_button.get_attribute("class"):
-        print("✅ [PASS] 좋아요 취소 및 버튼 검정색 적용")
+        print("✅ [PASS] 싫어요 취소 및 버튼 검정색 적용")
     else:
-        print("⛔ [FAIL] 좋아요 취소 실패 또는 버튼 색상 적용 실패")
+        print("⛔ [FAIL] 싫어요 취소 실패 또는 버튼 색상 적용 실패")
         

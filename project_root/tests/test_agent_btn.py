@@ -5,6 +5,7 @@ from src.pages.login_page import LoginPage
 from src.pages.agent_enter_page import AgentEnterPage
 
 def test_HIST018_agent_btn(driver,login) :
+    time.sleep(5)
 
     # 에이전트 페이지 접속
     agent_page = AgentEnterPage(driver)

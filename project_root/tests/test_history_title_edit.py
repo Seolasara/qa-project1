@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 from src.pages.login_page import LoginPage
 
 
-def test_HIST034_chat_delete(driver,login,send_test_message) :
+def test_HIST035_chat_edit(driver,login,send_test_message) :
 
     # 테스트용 메세지 전송
     send_test_message("히스토리 제목 수정 테스트(답장하지마)")
@@ -29,17 +29,16 @@ def test_HIST034_chat_delete(driver,login,send_test_message) :
     # 대화 제목 변경 입력 
     title_input = driver.find_element(By.NAME,"name")
     title_input.click()
+    title_input.send_keys(Keys.END)
 
     # 운영체제에 맞는 input 내용 초기화
-    if platform.system() == "Darwin":  # macOS
-        title_input.send_keys(Keys.COMMAND + "a")
-    else:  # Windows/Linux
-        title_input.send_keys(Keys.CONTROL + "a")
-
-    title_input.send_keys(Keys.BACKSPACE)  # 기존 값 삭제
-    time.sleep(0.5)
-
+    current_value = title_input.get_attribute("value")
+    for _ in range(len(current_value)):
+        title_input.send_keys(Keys.BACKSPACE)
+    time.sleep(0.5)  # 기존 값 삭제
     title_input.send_keys("히스토리 제목 수정 완료")
+
+
     submit_btn = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit_btn.click()
     time.sleep(3)

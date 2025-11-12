@@ -1,3 +1,6 @@
+import os
+import time
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -42,9 +45,11 @@ class AgentPage:
         el.send_keys(name)
 
     def set_description(self, desc):
-        el = self.driver.find_element(*self.description_field)
-        el.clear()
-        el.send_keys(desc)
+        description_el = self.driver.find_element(By.CSS_SELECTOR, "input[name='description']")
+        description_el.clear()
+        description_el.send_keys(desc)
+        description_el.send_keys(Keys.TAB)
+
 
     def set_rules(self, rules):
         el = self.driver.find_element(*self.rules_field)
@@ -55,10 +60,6 @@ class AgentPage:
         el = self.driver.find_element(*self.start_message)
         el.clear()
         el.send_keys(msg)
-
-    # 파일 업로드
-    def upload_file(self, file_path):
-        self.driver.find_element(*self.file_field).send_keys(file_path)
 
     # 기능 체크박스 클릭(단일)
     def checkbox_function(self, function):
@@ -74,7 +75,7 @@ class AgentPage:
                 el.click()
 
     # 기능 체크박스 클릭(복수)
-    def checkbox_functions(self, functions):
+    def checkbox_functions(self, *functions):
         for function in functions:
             self.checkbox_function(function)
 
@@ -95,3 +96,4 @@ class AgentPage:
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.save_button)
         ).click()
+

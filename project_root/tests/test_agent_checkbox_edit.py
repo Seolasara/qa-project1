@@ -48,7 +48,6 @@ def test_CSTM027_checkbox_edit(driver, new_agent):
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()
-    # time.sleep(5)
 
     print("✅ [PASS] 에이전트 수정 성공")
 

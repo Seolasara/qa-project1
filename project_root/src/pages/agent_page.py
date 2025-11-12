@@ -45,15 +45,11 @@ class AgentPage:
         el.send_keys(name)
 
     def set_description(self, desc):
-        el = self.driver.find_element(*self.name_field)
-        el.send_keys(Keys.TAB)
-        time.sleep(1)
-        description_el = self.driver.switch_to.active_element  # 현재 포커스 input
-        self.driver.execute_script("""
-        arguments[0].value = arguments[1];
-        arguments[0].dispatchEvent(new Event('input', { bubbles: true }));
-        arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
-        """, description_el, desc)
+        description_el = self.driver.find_element(By.CSS_SELECTOR, "input[name='description']")
+        description_el.clear()
+        description_el.send_keys(desc)
+        description_el.send_keys(Keys.TAB)
+
 
     def set_rules(self, rules):
         el = self.driver.find_element(*self.rules_field)

@@ -34,9 +34,13 @@ class AgentPage:
 
     # 에이전트 생성/설정 페이지
     def agent_create(self):
+        time.sleep(2)
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.agent_menu)).click()
+        time.sleep(1)
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.agent_button)).click()
+        time.sleep(1)
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.agent_settings)).click()
+        time.sleep(1)
 
     # 필드 입력 메서드
     def set_name(self, name):

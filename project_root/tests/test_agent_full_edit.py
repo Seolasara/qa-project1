@@ -13,7 +13,7 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     # 수정용 에이전트 생성
     new_agent.set_name("수정 테스트용 에이전트") 
     new_agent.set_description("한줄 소개 테스트")
-    time.sleep(3)
+    # time.sleep(0.5)
     new_agent.set_rules("수정 테스트") 
     new_agent.set_start_message("수정 테스트 에이전트 입니다.")
     wait = WebDriverWait(new_agent.driver, 10) 
@@ -54,6 +54,17 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     time.sleep(0.5)
     new_agent.set_name("수정 완료 된 에이전트")
 
+    # 기존 한줄소개 지우고 수정
+    desc = driver.find_element(By.CSS_SELECTOR, "input[name='description']")
+    desc.click()
+    if platform.system() == "Darwin":
+        desc.send_keys(Keys.COMMAND + "a")
+    else:  
+        desc.send_keys(Keys.CONTROL + "a")
+    desc.send_keys(Keys.BACKSPACE) 
+    time.sleep(0.5)
+    new_agent.set_description("수정 완료 된 한줄소개")
+
     # 기존 규칙 지우고 수정
     rules = driver.find_element(*new_agent.rules_field)
     rules.click()
@@ -83,7 +94,7 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()
-    time.sleep(5)
+    time.sleep(8)
 
     back_btn = driver.find_element(By.CSS_SELECTOR, 'button[aria-label="뒤로가기"]')
     back_btn.click()

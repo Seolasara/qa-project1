@@ -52,7 +52,7 @@ def test_ACCT010_change_english(language):
     actual_text = message_box.get_attribute("placeholder")
     expected_text = "Enter your message..."
 
-    assert actual_text == expected_text, "[FAIL] 영어 변경 실패"
+    assert actual_text == expected_text, "⛔ [FAIL] 영어 변경 실패"
     print("✅ [PASS] 영어 번경 성공")
 
 
@@ -73,7 +73,7 @@ def test_ACCT011_change_japanese(language):
     actual_text = message_box.get_attribute("placeholder")
     expected_text = "メッセージを入力してください..."
 
-    assert actual_text == expected_text, "[FAIL] 일본어 변경 실패"
+    assert actual_text == expected_text, "⛔ [FAIL] 일본어 변경 실패"
     print("✅ [PASS] 일본어 번경 성공")
 
 
@@ -94,7 +94,7 @@ def test_ACCT012_change_thai(language):
     actual_text = message_box.get_attribute("placeholder")
     expected_text = "ป้อนข้อความของคุณ..."
 
-    assert actual_text == expected_text, "[FAIL] 태국어 변경 실패"
+    assert actual_text == expected_text, "⛔ [FAIL] 태국어 변경 실패"
     print("✅ [PASS] 태국어 번경 성공")
 
 
@@ -116,7 +116,7 @@ def test_ACCT013_change_english_relogin(language):
     wait.until(EC.element_to_be_clickable((By.XPATH, "//p[text()='American English']"))).click()
     message_box = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "textarea[placeholder='Enter your message...']")))
 
-    assert message_box.get_attribute("placeholder") == "Enter your message...", "[FAIL] 영어 변경 실패"
+    assert message_box.get_attribute("placeholder") == "Enter your message...", "⛔ [FAIL] 영어 변경 실패"
     print("✅ [PASS] 영어 번경 성공")
 
     # 3. 로그아웃
@@ -126,7 +126,7 @@ def test_ACCT013_change_english_relogin(language):
     wait.until(EC.element_to_be_clickable((By.XPATH, "//p[text()='Logout']"))).click()
     wait.until(EC.url_contains("accounts.elice.io"))
 
-    assert "accounts" in driver.current_url, "[FAIL] 로그아웃 실패"
+    assert "accounts" in driver.current_url, "⛔ [FAIL] 로그아웃 실패"
     print("✅ [PASS] 로그아웃 성공")
 
     # 4. 재로그인
@@ -134,11 +134,11 @@ def test_ACCT013_change_english_relogin(language):
     driver.find_element(By.XPATH, "//button[text()='Login']").click()
     wait.until(EC.url_contains("qaproject.elice.io"))
 
-    assert "qaproject.elice.io" in driver.current_url, "[FAIL] 재로그인 실패"
+    assert "qaproject.elice.io" in driver.current_url, "⛔ [FAIL] 재로그인 실패"
     print("✅ [PASS] 재로그인 성공")
 
     # 5. 언어 설정 유지 확인
     message_box = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "textarea[placeholder='Enter your message...']")))
 
-    assert message_box.get_attribute("placeholder") == "Enter your message...", "[FAIL] 영어 유지 실패"
+    assert message_box.get_attribute("placeholder") == "Enter your message...", "⛔ [FAIL] 영어 유지 실패"
     print("✅ [PASS] 영어 유지 성공")

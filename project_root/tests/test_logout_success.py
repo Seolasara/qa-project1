@@ -10,7 +10,7 @@ def test_ACCT009_logout_success(driver,login):
     wait = WebDriverWait(driver, 10)
 
     # 로그인
-    assert "qaproject.elice.io" in driver.current_url, "[FAIL] 로그인 실패"
+    assert "qaproject.elice.io" in driver.current_url, "⛔ [FAIL] 로그인 실패"
     print("✅ [PASS] 로그인 성공")
 
 
@@ -36,7 +36,7 @@ def test_ACCT009_logout_success(driver,login):
     
     time.sleep(5)
 
-    assert "accounts" in driver.current_url.lower(), "[FAIL] 로그아웃 실패"
+    assert "accounts" in driver.current_url.lower(), "⛔ [FAIL] 로그아웃 실패"
     print("✅ [PASS] 로그아웃 성공")
 
 

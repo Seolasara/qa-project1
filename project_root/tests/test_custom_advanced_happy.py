@@ -69,8 +69,8 @@ def test_CSTM013_with_all_functions(new_agent):
 
     # 2. 입력 필드 이름/한줄 소개/규칙/시작대화 입력 
     new_agent.set_name("테스트2")
-    time.sleep(1)
-    # new_agent.set_description("테스트2")
+    time.sleep(2)
+    new_agent.set_description("테스트2")
     new_agent.set_rules("테스트2")
     new_agent.set_start_message("테스트2")
 

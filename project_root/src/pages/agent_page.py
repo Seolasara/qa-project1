@@ -97,3 +97,13 @@ class AgentPage:
             EC.element_to_be_clickable(self.save_button)
         ).click()
 
+    def upload_file(self, file_path):
+        self.wait = WebDriverWait(self.driver, 10)
+        project_root = os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        file_path = os.path.join(project_root, "src", "resources", file_path)
+        file_input = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, "(//input[@type='file'])[2]"))
+        )
+        file_input.send_keys(file_path)

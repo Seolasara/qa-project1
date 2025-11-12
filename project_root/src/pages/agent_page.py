@@ -1,3 +1,4 @@
+import os
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -56,6 +57,15 @@ class AgentPage:
         el.clear()
         el.send_keys(msg)
 
+    # 지식 파일 업로드(단일)
+    def upload_file(self, filename, timeout=10):
+        wait = WebDriverWait(self.driver, timeout)
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        file_path = os.path.join(project_root, "src", "resources", filename)
+
+        file_input_el = wait.until(EC.presence_of_element_located(self.file_input))
+        file_input_el.send_keys(file_path)
+
     # 기능 체크박스 클릭(단일)
     def checkbox_function(self, function):
         checkbox_map = {
@@ -91,3 +101,4 @@ class AgentPage:
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.save_button)
         ).click()
+

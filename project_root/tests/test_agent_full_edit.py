@@ -1,5 +1,6 @@
 import time
 import platform
+import os
 from selenium.webdriver.common.by import By
 from src.pages.login_page import LoginPage
 from src.pages.agent_page import AgentPage
@@ -13,6 +14,9 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     new_agent.set_name("수정 테스트용 에이전트") 
     time.sleep(3)
     new_agent.set_rules("수정 테스트") 
+    new_agent.set_start_message("수정 테스트 에이전트 입니다.")
+    new_agent.upload_file("testfile2.pdf")
+    new_agent.checkbox_functions("search", "browsing", "image", "execution")
     new_agent.click_create()
     new_agent.click_save()
     time.sleep(3)
@@ -31,7 +35,7 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     first_agent.click()
     time.sleep(5)
     
-    # 에이전트 수정
+# 에이전트 수정
     new_agent = AgentPage(driver)
 
     # 기존 이름 지우고 수정
@@ -55,13 +59,23 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     rules.send_keys(Keys.BACKSPACE)
     time.sleep(0.5)
     new_agent.set_rules("수정 완료 된 테스트 에이전트 입니다.")
+    time.sleep(0.5)
 
     # 시작 대화
+    close_buttons = driver.find_elements(By.CSS_SELECTOR, '[data-testid="xmarkIcon"]')
+    close_buttons[0].click()
     new_agent.set_start_message("수정 완료 된 테스트 에이전트 입니다.")
 
-    # 기능 체크
-    new_agent.checkbox_functions("search", "browsing")
+    # 파일 삭제
+    del_btn = driver.find_element(By.CSS_SELECTOR,'[aria-label="삭제"]')
+    del_btn.click()
+    time.sleep(2)
+
+    # 기능 체크 해제
+    search = driver.find_element(*new_agent.search_function).click()
+    browsing = driver.find_element(*new_agent.browsing_function).click()
     time.sleep(3)
+
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()
     time.sleep(5)

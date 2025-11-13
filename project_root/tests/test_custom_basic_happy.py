@@ -9,30 +9,21 @@ from src.pages.agent_page import AgentPage
 
 # --- 필수값으로만 에이전트 생성(이름,규칙) --- 
 def test_CSTM005_with_essential_field(new_agent): 
-    # 1.로그인 
-    # 2. AgentPage 객체 생성 / 에이전트 생성 페이지 이동 
-
-    # 3. 필수값 이름/규칙 입력 
+    # 필수값 이름/규칙 입력 
     new_agent.set_name("테스트") 
-    time.sleep(3)
     new_agent.set_rules("테스트") 
     
-    # 4. 만들기 클릭
+    # 만들기 클릭 / 저장 클릭
     new_agent.click_create()
-
-    # 5. 공개 설정 후 저장 클릭
     new_agent.click_save()
 
-    # 6. 에이전트 생성 메세지 확인
-    text = WebDriverWait(new_agent.driver, 10).until(
-        EC.presence_of_element_located((By.ID, "notistack-snackbar"))
-    ).text.strip()
-
+    # 에이전트 생성 메세지 확인
+    text = new_agent.wait.until(EC.presence_of_element_located((By.ID, "notistack-snackbar"))).text.strip()
     assert "에이전트가 생성 되었습니다." in text, "⛔ [FAIL] 생성 실패"
     print("✅ [PASS] 에이전트 생성 완료") 
 
 
-# --- 필수값으로 극단적 입력(이모지) ---
+# --- 극단적 입력(이모지) ---
 def test_CSTM008_extreme_input(new_agent):
 
     emoji = "🙂"
@@ -50,8 +41,6 @@ def test_CSTM008_extreme_input(new_agent):
     name.send_keys(" ")  # React 감지용
     name.send_keys("\b")
 
-    time.sleep(3)
-
     # JavaScript로 규칙 필드 입력 / 강제 이벤트 실행
     rules = driver.find_element(By.NAME, "systemPrompt")
     rules.click()
@@ -64,33 +53,27 @@ def test_CSTM008_extreme_input(new_agent):
     rules.send_keys(" ") # React 감지용
     rules.send_keys("\b")
     
-    # 4. 만들기/저장 클릭
+    # 만들기/저장 클릭
     new_agent.click_create()
     new_agent.click_save()
 
-    # 5. 에이전트 생성 메세지
-    text = WebDriverWait(new_agent.driver, 10).until(
-        EC.presence_of_element_located((By.ID, "notistack-snackbar"))
-    ).text.strip()
-
+    # 에이전트 생성 메세지 확인
+    text = new_agent.wait.until(EC.presence_of_element_located((By.ID, "notistack-snackbar"))).text.strip()
     assert "에이전트가 생성 되었습니다." in text, "⛔ [FAIL] 생성 실패"
     print("✅ [PASS] 에이전트 생성 완료") 
 
 
-# --- 필수값으로 극단적 입력(미지원 언어) --- 
+# --- 극단적 입력(미지원 언어) --- 
 def test_CSTM009_unavailable_language(new_agent): 
 
     # 필수값 이름/규칙 입력 
     new_agent.set_name("هههههههههه") 
-    time.sleep(3)
     new_agent.set_rules("هههههههههه") 
     
     new_agent.click_create()
     new_agent.click_save()
 
-    text = WebDriverWait(new_agent.driver, 10).until(
-        EC.presence_of_element_located((By.ID, "notistack-snackbar"))
-    ).text.strip()
-
+    # 에이전트 생성 메세지 확인
+    text = new_agent.wait.until(EC.presence_of_element_located((By.ID, "notistack-snackbar"))).text.strip()
     assert "에이전트가 생성 되었습니다." in text, "⛔ [FAIL] 생성 실패"
     print("✅ [PASS] 에이전트 생성 완료") 

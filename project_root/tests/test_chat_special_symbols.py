@@ -6,8 +6,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from src.pages.login_page import LoginPage
 
-# CBAS005: 특수문자 포함 질문 → 응답 확인
-def test_CBAS001_chat_basic(driver, login, send_test_message):
+# CBAS006: 특수문자 포함 질문 → 응답 확인
+def test_CBAS006_chat_special_symbols(driver, login, send_test_message):
     
     send_test_message("$$%⭑ 대한민국의 수도는?")
     print("✅ [PASS] 질문 전송 완료")

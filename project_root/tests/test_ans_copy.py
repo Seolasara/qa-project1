@@ -16,7 +16,6 @@ def test_CBAS015_ans_copy(driver, login, send_test_message):
     WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-step-type='assistant_message'] .message-content"))
     )
-    time.sleep(3)
 
     response_box = driver.find_element(By.CSS_SELECTOR, "div[data-step-type='assistant_message'] .message-content")
     response_text = response_box.get_attribute("innerText")
@@ -33,7 +32,6 @@ def test_CBAS015_ans_copy(driver, login, send_test_message):
     # 클립보드 복사 버튼 클릭
     copy_button.click()
     print("✅ [PASS] 클립보드 복사 버튼 클릭 완료")
-    time.sleep(1)
     
     # 클립보드 복사 버튼 아이콘이 체크 표시로 변경 확인
     check_icon = WebDriverWait(driver, 10).until(

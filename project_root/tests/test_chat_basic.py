@@ -16,7 +16,6 @@ def test_CBAS001_chat_basic(driver, login, send_test_message):
     WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "div[data-step-type='assistant_message'] .message-content"))
     )
-    time.sleep(3)
 
     response_box = driver.find_element(By.CSS_SELECTOR, "div[data-step-type='assistant_message'] .message-content")
     response_text = response_box.get_attribute("innerText")

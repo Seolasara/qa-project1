@@ -34,7 +34,7 @@ def test_CSTM030_agent_delete(driver, new_agent):
     new_agent.wait.until(EC.text_to_be_present_in_element((By.ID, "notistack-snackbar"), "에이전트가 삭제되었습니다."))
     message = new_agent.wait.until(EC.presence_of_element_located((By.ID, "notistack-snackbar"))).text.strip()
     assert "에이전트가 삭제되었습니다." in message, "⛔ [FAIL] 삭제 완료 메세지X"
-    print("✅ [PASS] 에이전트 삭제 메세지 표시") 
+    print("✅ [PASS] 에이전트 삭제 메세지 확인 완료") 
 
     # 목록에서 삭제 확인
     agents = driver.find_elements(By.CSS_SELECTOR, "div[data-testid='virtuoso-item-list']")

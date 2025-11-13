@@ -73,6 +73,7 @@ def new_agent(driver):
     agent_page.agent_create()
     return agent_page
 
+
 @pytest.fixture
 def click_plus(driver):
     """HelpyChat의 '+ 버튼' 클릭 """
@@ -90,3 +91,31 @@ def click_plus(driver):
         time.sleep(1)
 
     return _click
+
+
+# 테스트 계정2
+@pytest.fixture 
+def login2(driver):
+    """HelpyChat 계정2 로그인 fixture"""
+    login_page = LoginPage(driver)
+    login_page.page_open()
+    login_page.login2()
+    time.sleep(3)
+    return driver
+
+
+# 언어 설정 메뉴까지 진입
+@pytest.fixture
+def language(login2):
+    driver = login2
+    wait = WebDriverWait(driver, 10)
+    
+    # 아이콘 클릭 / 프로필 대기
+    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='PersonIcon']"))).click()
+    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div[data-elice-user-profile-content='true']")))
+    time.sleep(1) # UI가 완전히 뜰 때까지 조금 더 대기(다른 요소에 의한 요소 가림 방지) 
+
+    # 3. 언어설정 클릭
+    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[data-menu-id='locale_setting']"))).click()
+    time.sleep(1) # UI가 완전히 뜰 때까지 조금 더 대기(다른 요소에 의한 요소 가림 방지)
+    return driver

@@ -3,36 +3,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-# 테스트 계정2 로그인
-@pytest.fixture 
-def test_account2(driver):
-    wait = WebDriverWait(driver, 10)
-    driver.get("https://qaproject.elice.io/ai-helpy-chat")
-    driver.find_element(By.NAME, "loginId").send_keys("team2a@elice.com")
-    driver.find_element(By.NAME, "password").send_keys("team2elice!@")
-    driver.find_element(By.XPATH, "//button[text()='Login']").click()
-    return driver
-
-# 언어 설정 메뉴까지 진입
-@pytest.fixture
-def language(test_account2):
-    driver = test_account2
-    wait = WebDriverWait(driver, 10)
-    
-    # 1. 프로필 아이콘 클릭
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='PersonIcon']"))).click()
-
-    # 2. 프로필이 뜰 때까지 대기
-    wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div[data-elice-user-profile-content='true']")))
-
-    time.sleep(1) # UI가 완전히 뜰 때까지 조금 더 대기(다른 요소에 의한 요소 가림 방지) 
-
-    # 3. 언어설정 클릭
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "div[data-menu-id='locale_setting']"))).click()
- 
-    time.sleep(1) # UI가 완전히 뜰 때까지 조금 더 대기(다른 요소에 의한 요소 가림 방지)
-    return driver
+from src.pages.login_page import LoginPage
 
 
 # --- 영어로 변경 ---

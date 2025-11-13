@@ -64,7 +64,7 @@ def test_CSTM025_my_agent_light_edit(driver, new_agent):
         rules.send_keys(Keys.BACKSPACE)
     time.sleep(0.2)
     new_agent.set_rules("일부 수정 완료 된 테스트 에이전트 입니다.")
-    time.sleep(0.5)
+    time.sleep(2)
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()

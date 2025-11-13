@@ -79,7 +79,7 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     # 기능 체크 해제
     search = driver.find_element(*new_agent.search_function).click()
     browsing = driver.find_element(*new_agent.browsing_function).click()
-    time.sleep(3)
+    time.sleep(5)
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()

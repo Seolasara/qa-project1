@@ -83,14 +83,14 @@ def test_CSTM013_with_all_functions(new_agent):
     new_agent.checkbox_functions("search", "browsing", "image", "execution")
 
     checkboxes = [
-        new_agent.search_function, 
-        new_agent.browsing_function, 
-        new_agent.image_function, 
-        new_agent.execution_function,
+        "search_function", 
+        "browsing_function", 
+        "image_function", 
+        "execution_function",
         ]
 
-    for box in checkboxes:
-        assert new_agent.driver.find_element(*box).is_selected()
+    for key in checkboxes:
+        assert new_agent.driver.find_element(*new_agent.locators[key]).is_selected()
     print("✅ [PASS] 모든 기능 체크박스 선택 완료")
     
     # 만들기/저장 클릭

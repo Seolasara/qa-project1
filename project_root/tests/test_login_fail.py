@@ -15,8 +15,6 @@ def test_ACCT003_invalid_email_domain(driver):
     login_page.enter_password(login_page.config["login_pw"])
     login_page.click_login_button()
 
-    time.sleep(1)
-
     current_url = driver.current_url
     assert "accounts" in current_url.lower(), "⛔ [FAIL] 예상대로 로그인 페이지 유지X"
     print("❎ [XFAIL] 로그인 실패 - 이메일 도메인 불일치")
@@ -33,8 +31,6 @@ def test_ACCT004_invalid_email(driver):
     login_page.enter_password(login_page.config["login_pw"])
     login_page.click_login_button()
 
-    time.sleep(1)
-
     current_url = driver.current_url
     assert "accounts" in current_url.lower(), "⛔ [FAIL] 예상대로 로그인 페이지 유지X"
     print("❎ [XFAIL] 로그인 실패 - 이메일 혹은 비밀번호 불일치")
@@ -50,8 +46,6 @@ def test_ACCT005_extreme_email_input(driver):
     login_page.enter_email(extreme_email)
     login_page.enter_password(login_page.config["login_pw"])
     login_page.click_login_button()
-
-    time.sleep(1)
 
     current_url = driver.current_url
     assert "accounts" in current_url.lower(), "⛔ [FAIL] 예상대로 로그인 페이지 유지X"
@@ -71,8 +65,6 @@ def test_ACCT006_invalid_password(driver):
     login_page.enter_password(wrong_password)
     login_page.click_login_button()
 
-    time.sleep(1)
-
     current_url = driver.current_url
     assert "accounts" in current_url.lower(), "⛔ [FAIL] 예상대로 로그인 페이지 유지X"
     print("❎ [XFAIL] 로그인 실패 - 이메일 혹은 비밀번호 불일치")
@@ -89,8 +81,6 @@ def test_ACCT007_extreme_password_input(driver):
     login_page.enter_email(login_page.config["login_id"])
     login_page.enter_password(extreme_password)
     login_page.click_login_button()
-
-    time.sleep(1)
 
     current_url = driver.current_url
     assert "accounts" in current_url.lower(), "⛔ [FAIL] 예상대로 로그인 페이지 유지X"

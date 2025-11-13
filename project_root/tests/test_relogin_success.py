@@ -43,6 +43,6 @@ def test_ACCT008_relogin_success(driver,login):
     relogin_page.enter_password(relogin_page.config["login_pw"])
     relogin_page.click_login_button()
 
-    time.sleep(5)
+    time.sleep(3)
     assert "qaproject.elice.io" in driver.current_url, "⛔ [FAIL] 재로그인 실패"
     print("✅ [PASS] 재로그인 성공")

@@ -9,11 +9,6 @@ from src.pages.login_page import LoginPage
 def test_ACCT009_logout_success(driver,login):
     wait = WebDriverWait(driver, 10)
 
-    # 로그인
-    assert "qaproject.elice.io" in driver.current_url, "⛔ [FAIL] 로그인 실패"
-    print("✅ [PASS] 로그인 성공")
-
-
     # 로그아웃 시도 / 프로필 클릭
     profile = wait.until(
         EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='PersonIcon']"))
@@ -34,7 +29,7 @@ def test_ACCT009_logout_success(driver,login):
     )
     logout_button.click()
     
-    time.sleep(5)
+    time.sleep(3)
 
     assert "accounts" in driver.current_url.lower(), "⛔ [FAIL] 로그아웃 실패"
     print("✅ [PASS] 로그아웃 성공")

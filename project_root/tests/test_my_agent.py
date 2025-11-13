@@ -24,7 +24,7 @@ def test_CSTM021_my_agent(driver, login):
     first_agent_name = None
     last_agent_name = None
 
-    for i in range(10):
+    for i in range(100):
         agent_items = my_agent_scroller.find_elements(By.CSS_SELECTOR, "div[data-index]")
         agent_indexes = [int(item.get_attribute("data-index")) for item in agent_items]
         max_index = max(agent_indexes)

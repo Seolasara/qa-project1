@@ -19,7 +19,7 @@ def test_CSTM020_agent_list(driver,login) :
     first_index = None
 
     # 에이전트 갯수 확인
-    for i in range(10):
+    for i in range(100):
         # 현재 렌더된 에이전트 목록 data-index 추출
         agent_items = agent_scroller.find_elements(By.CSS_SELECTOR, "div[data-index]")
         agent_indexes = [int(item.get_attribute("data-index")) for item in agent_items]
@@ -40,7 +40,7 @@ def test_CSTM020_agent_list(driver,login) :
 
         prev_max_index = max_index
 
-    print(f"\n최종 로드된 에이전트 목록 갯수 = {max_index}")
+    print(f"\n최종 로드된 에이전트 목록 갯수 = {max_index+1}")
 
     assert max_index >= first_index, "⛔ [FAIL] 에이전트 목록 확인 실패"
     print("\n✅ [PASS] 에이전트 목록 확인 성공")

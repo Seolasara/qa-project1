@@ -15,11 +15,7 @@ def test_CSTM026_my_agent_img_edit(driver, new_agent):
     new_agent.set_description("이미지 한줄 소개 테스트")
     new_agent.set_rules("이미지 수정 테스트") 
     new_agent.set_start_message("이미지 테스트 에이전트 입니다.")
-    wait = WebDriverWait(new_agent.driver, 10) 
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
-    file_path = os.path.join(project_root, "src", "resources", "testfile2.pdf") 
-    file_input = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='file'])[2]"))) 
-    file_input.send_keys(file_path)
+    new_agent.upload_file("testfile2.pdf")
     new_agent.checkbox_functions("search", "browsing", "image", "execution")
     new_agent.click_create()
     new_agent.click_save()
@@ -40,18 +36,18 @@ def test_CSTM026_my_agent_img_edit(driver, new_agent):
     time.sleep(3)
 
     # 랜덤이미지 수정
-    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
+    new_agent.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
     new_agent.driver.find_element(By.XPATH, "//li[normalize-space(text())='이미지 생성기']").click()
-    image = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
+    image = new_agent.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
     time.sleep(3)
 
     back_btn = driver.find_element(By.CSS_SELECTOR, 'button[aria-label="뒤로가기"]')
     back_btn.click()
     time.sleep(3)
 
-    img = WebDriverWait(driver, 10).until(
+    img = new_agent.wait.until(
         EC.presence_of_element_located((By.CSS_SELECTOR, 'img[alt="Agent avatar"]'))
     )
-    
+
     assert img.is_displayed(), "⛔ [FAIL] 이미지 수정 실패"
     print("✅ [PASS] 이미지 수정 완료") 

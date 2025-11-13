@@ -15,11 +15,7 @@ def test_CSTM027_checkbox_edit(driver, new_agent):
     new_agent.set_description("한줄 소개 테스트")
     new_agent.set_rules("수정 테스트") 
     new_agent.set_start_message("수정 테스트 에이전트 입니다.")
-    wait = WebDriverWait(new_agent.driver, 10) 
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
-    file_path = os.path.join(project_root, "src", "resources", "testfile2.pdf") 
-    file_input = wait.until(EC.presence_of_element_located((By.XPATH, "(//input[@type='file'])[2]"))) 
-    file_input.send_keys(file_path)
+    new_agent.upload_file("testfile2.pdf")
     new_agent.checkbox_functions("search", "browsing", "image", "execution")
     new_agent.click_create()
     new_agent.click_save()
@@ -43,7 +39,7 @@ def test_CSTM027_checkbox_edit(driver, new_agent):
     new_agent = AgentPage(driver)
 
     # 기능 체크 해제
-    execution = driver.find_element(*new_agent.execution_function)
+    execution = driver.find_element(*new_agent.locators["execution_function"])
     execution.click()
     time.sleep(3)
 
@@ -52,7 +48,6 @@ def test_CSTM027_checkbox_edit(driver, new_agent):
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()
     new_agent.click_save()
-    # time.sleep(5)
 
     print("✅ [PASS] 에이전트 수정 성공")
 

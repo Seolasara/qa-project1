@@ -16,7 +16,6 @@ def test_CBAS003_button_disabled_when_empty(driver, login):
     
     # 혹시 자동 입력되어 있을 수 있으니 공백으로 초기화
     input_box.clear()
-    # time.sleep(1)
     
     # 전송 버튼 요소 찾기
     send_button = driver.find_element(By.CSS_SELECTOR, "button#chat-submit")

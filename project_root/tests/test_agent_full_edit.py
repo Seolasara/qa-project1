@@ -39,34 +39,19 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     new_agent = AgentPage(driver)
 
     # 기존 이름 지우고 수정
-    name = driver.find_element(*new_agent.name_field)
-    name.click()
-    current_value = name.get_attribute("value")
-    for _ in range(len(current_value)):
-        name.send_keys(Keys.BACKSPACE)
-    time.sleep(0.2)
+    new_agent.clear_input("name_field")
     new_agent.set_name("수정 완료 된 에이전트")
 
     # 기존 한줄소개 지우고 수정
-    desc = driver.find_element(By.CSS_SELECTOR, "input[name='description']")
-    desc.click()
-    current_value = desc.get_attribute("value")
-    for _ in range(len(current_value)):
-        desc.send_keys(Keys.BACKSPACE)
-    time.sleep(0.2)
+    new_agent.clear_input("description_field")
     new_agent.set_description("수정 완료 된 한줄소개")
 
     # 기존 규칙 지우고 수정
-    rules = driver.find_element(*new_agent.rules_field)
-    rules.click()
-    current_value = rules.get_attribute("value")
-    for _ in range(len(current_value)):
-        rules.send_keys(Keys.BACKSPACE)
-    time.sleep(0.2)
+    new_agent.clear_input("rules_field")
     new_agent.set_rules("수정 완료 된 테스트 에이전트 입니다.")
     time.sleep(0.5)
 
-    # 시작 대화
+    # 시작 대화 수정
     close_buttons = driver.find_elements(By.CSS_SELECTOR, '[data-testid="xmarkIcon"]')
     close_buttons[0].click()
     new_agent.set_start_message("수정 완료 된 테스트 에이전트 입니다.")
@@ -77,8 +62,8 @@ def test_CSTM024_my_agent_edit(driver, new_agent):
     time.sleep(2)
 
     # 기능 체크 해제
-    search = driver.find_element(*new_agent.search_function).click()
-    browsing = driver.find_element(*new_agent.browsing_function).click()
+    search = driver.find_element(*new_agent.locators["search_function"]).click()
+    browsing = driver.find_element(*new_agent.locators["browsing_function"]).click()
     time.sleep(5)
 
     update_btn = driver.find_element(By.XPATH, "//button[text()='업데이트']").click()

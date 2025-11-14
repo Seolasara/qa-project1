@@ -19,6 +19,13 @@ def driver():
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
 
+    # 테스트 안정화 - 백그라운드 전환시 크롬 렌더링 멈춤 방지, gpu버그로 인한 로딩 FREEZE 방지
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--remote-allow-origins=*")
+    chrome_options.add_argument("--disable-renderer-backgrounding")
+    chrome_options.add_argument("--disable-background-timer-throttling")
+    chrome_options.add_argument("--disable-backgrounding-occluded-windows")
+
     # 💡 '여러 파일 다운로드' 자동 허용 설정
     prefs = {
         "profile.default_content_setting_values.automatic_downloads": 1,  # 여러 파일 다운로드 허용

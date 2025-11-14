@@ -8,7 +8,7 @@ from src.pages.login_page import LoginPage
 
 
 def test_CADV089_quiz_subjective_single_answer(driver, login, click_plus, send_test_message):
-    """HelpyChat 퀴즈 생성 (주관식 1정답 검증) """
+    """HelpyChat 퀴즈 생성 (주관식 1정답 검증)"""
 
     config = read_config("helpychat")
     base_url = config["base_url"]

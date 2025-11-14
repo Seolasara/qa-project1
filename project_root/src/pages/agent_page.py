@@ -21,6 +21,7 @@ class AgentPage(BasePage):
             "rules_field" : (By.NAME, "systemPrompt"),
             "start_message": (By.NAME, "conversationStarters.0.value"),
             # 업로드 필드
+            "image_button" : (By.CSS_SELECTOR, "svg[data-testid='plusIcon']"),
             "image_field" : (By.CSS_SELECTOR, "svg[data-testid='plusIcon']"),
             "file_field" : (By.CSS_SELECTOR, "label input[type='file']"),
             # 기능 체크박스
@@ -125,3 +126,19 @@ class AgentPage(BasePage):
         for _ in range(len(current_value)): 
             element.send_keys(Keys.BACKSPACE) 
         time.sleep(0.2)
+
+    # 이미지 업로드(단일)
+    def upload_image(self, image_path):
+        # + 버튼
+        self.wait.until(
+            EC.element_to_be_clickable((self.locators["image_button"]))
+            ).click()
+
+        project_root = os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        image_path = os.path.join(project_root, "src", "resources", image_path)
+        image_input = self.wait.until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']"))
+        )
+        image_input.send_keys(image_path)

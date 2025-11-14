@@ -27,12 +27,11 @@ def test_CSTM005_with_essential_field(new_agent):
 def test_CSTM008_extreme_input(new_agent):
 
     emoji = "🙂"
-    driver = new_agent.driver
 
     # JavaScript로 이름 필드 입력 / 강제 이벤트 실행
-    name = driver.find_element(By.NAME, "name")
+    name = new_agent.driver.find_element(*new_agent.locators["name_field"])
     name.click()
-    driver.execute_script(
+    new_agent.driver.execute_script(
             "arguments[0].value = arguments[1];"
             "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
             name,
@@ -40,11 +39,12 @@ def test_CSTM008_extreme_input(new_agent):
         )
     name.send_keys(" ")  # React 감지용
     name.send_keys("\b")
+    time.sleep(0.5)
 
     # JavaScript로 규칙 필드 입력 / 강제 이벤트 실행
-    rules = driver.find_element(By.NAME, "systemPrompt")
+    rules = new_agent.driver.find_element(*new_agent.locators["rules_field"])
     rules.click()
-    driver.execute_script(
+    new_agent.driver.execute_script(
         "arguments[0].value = arguments[1];"
         "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
         rules,

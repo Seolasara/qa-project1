@@ -36,7 +36,7 @@ def test_CSTM026_my_agent_img_edit(driver, new_agent):
     time.sleep(3)
 
     # 랜덤이미지 수정
-    new_agent.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
+    new_agent.wait.until(EC.element_to_be_clickable((new_agent.locators["image_button"]))).click()
     new_agent.driver.find_element(By.XPATH, "//li[normalize-space(text())='이미지 생성기']").click()
     image = new_agent.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
     time.sleep(3)

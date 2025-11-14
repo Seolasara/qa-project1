@@ -15,7 +15,7 @@ def test_CSTM010_create_image(new_agent):
     new_agent.set_rules("테스트") 
 
     # "+"버튼 클릭 
-    new_agent.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
+    new_agent.wait.until(EC.element_to_be_clickable((new_agent.locators["image_button"]))).click()
     
     # 이미지 생성 버튼 누르고 대기
     new_agent.driver.find_element(By.XPATH, "//li[normalize-space(text())='이미지 생성기']").click()
@@ -28,15 +28,8 @@ def test_CSTM010_create_image(new_agent):
 
 # --- 에이전트 대용량 사진 업로드 --- 
 def test_CSTM011_large_image(new_agent): 
-    # 파일 경로 설정
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
-
-    # "+"버튼 클릭 
-    new_agent.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
-
-    # 숨겨진 input 찾기 / 업로드
-    file_input = new_agent.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']"))).send_keys(image_path)
+   
+    new_agent.upload_image("20.5mb.jpg")
 
     # 이미지 업로드 확인
     image = new_agent.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
@@ -49,14 +42,8 @@ def test_CSTM011_large_image(new_agent):
 # --- 모든 기능 설정한 에이전트 생성 --- 
 def test_CSTM013_with_all_functions(new_agent):
 
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    image_path = os.path.join(project_root, "src", "resources", "20.5mb.jpg")
-
     # 이미지 업로드
-    new_agent.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "svg[data-testid='plusIcon']"))).click()
-    image_input = new_agent.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']"))).send_keys(image_path)
-    assert os.path.exists(image_path), f"⛔ [FAIL] 파일 없음: {image_path}"
-
+    new_agent.upload_image("20.5mb.jpg")
     image = new_agent.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'img.MuiAvatar-img')))
     assert image.is_displayed(), "⛔ [FAIL] 이미지 업로드 실패"
     print("✅ [PASS] 이미지 업로드 성공") 

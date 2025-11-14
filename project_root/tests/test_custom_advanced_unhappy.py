@@ -3,12 +3,13 @@ import time
 import pytest 
 from selenium.webdriver.common.by import By 
 from selenium.webdriver.support.ui import WebDriverWait 
-from selenium.webdriver.support import expected_conditions as EC 
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from src.pages.login_page import LoginPage 
 from src.pages.agent_page import AgentPage 
 
 
-# --- 필수값으로만 에이전트 생성(이름,규칙) --- 
+# --- 한줄 소개 극단적 입력 --- 
 def test_CSTM012_extreme_input(new_agent): 
 
     # 수값 이름/규칙/극단적 한줄 소개 입력 
@@ -23,8 +24,12 @@ def test_CSTM012_extreme_input(new_agent):
     print("❎ [XFAIL] 한줄 소개는 최대 300자입니다")
 
     # 3. 만들기 버튼 비활성화 확인
-    create_button = new_agent.driver.find_element(By.XPATH, "//button[text()='만들기']")
-    check = create_button.get_attribute("disabled")
-    assert check is not None, "⛔ [FAIL] 예상대로 만들기 버튼 비활성화X"
+    try:
+        new_agent.wait_for_button()
+        button_active = True
+    except TimeoutException:
+        button_active = False
+
+    assert not button_active, "⛔ [FAIL] 예상대로 만들기 버튼 비활성화X"
 
     print("❎ [XFAIL] 에이전트 생성 실패 - 한줄 소개 극단적 입력") 

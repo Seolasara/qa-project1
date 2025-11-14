@@ -13,9 +13,7 @@ def test_CSTM003_try_without_essential(new_agent):
     
     # 만들기 버튼 활성화 확인
     try:
-        new_agent.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[text()='만들기']"))
-        )
+        new_agent.wait_for_button()
         button_active = True
     except TimeoutException:
         button_active = False
@@ -24,16 +22,14 @@ def test_CSTM003_try_without_essential(new_agent):
     print("❎ [XFAIL] 에이전트 생성 실패 - 필수값 미입력") 
 
 
-    # --- 이름 필드만 입력 / 생성 시도 --- 
+# --- 이름 필드만 입력 / 생성 시도 --- 
 def test_CSTM004_with_name_input(new_agent): 
     
     # 이름 입력 후 만들기 버튼 활성화 확인
     new_agent.set_name("테스트") 
 
     try:
-        new_agent.wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[text()='만들기']"))
-        )
+        new_agent.wait_for_button()
         button_active = True
     except TimeoutException:
         button_active = False

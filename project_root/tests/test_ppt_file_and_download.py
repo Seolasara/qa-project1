@@ -47,13 +47,13 @@ def test_CADV078_ppt_create_and_download(driver, login, click_plus, send_test_me
             "//*[contains(text(),'프레젠테이션 생성이 완료되었습니다') or contains(text(),'Presentation completed')]"
         ))
     )
-    print("✅ 🎉 프레젠테이션 생성 완료 문구 감지됨!")
+    print("✅ 프레젠테이션 생성 완료 문구 감지됨!")
 
     # 잠시 대기 (HelpyChat이 버튼을 렌더링할 시간)
     time.sleep(5)
 
     # ✅ MUI 기반 "PPTX 다운로드" 버튼 대기 및 클릭
-    print("🔍 'PPTX 다운로드' 버튼 탐색 중...")
+    print("🔍 'PPTX 다운로드' 버튼 탐색 중")
     try:
         download_button = WebDriverWait(driver, 300).until(
             EC.element_to_be_clickable((
@@ -72,7 +72,7 @@ def test_CADV078_ppt_create_and_download(driver, login, click_plus, send_test_me
         assert False, "'PPTX 다운로드' 버튼 클릭 실패"
 
     # ✅ 파일 다운로드 완료 검증
-    print("📥 파일 다운로드 대기 중...")
+    print("📥 파일 다운로드 대기")
     file_downloaded = False
     for _ in range(180):  # 최대 3분 대기
         time.sleep(1)
@@ -85,5 +85,5 @@ def test_CADV078_ppt_create_and_download(driver, login, click_plus, send_test_me
             break
 
     assert file_downloaded, "❌ PPTX 파일이 다운로드되지 않았습니다."
-    print("✅ HelpyChat PPT 생성 및 다운로드 테스트 통과 🎉")
+    print("✅ HelpyChat PPT 생성 및 다운로드 테스트 성공")
     

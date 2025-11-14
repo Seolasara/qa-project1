@@ -13,6 +13,8 @@ def test_scroll_to_top_and_click_latest(driver, login, send_test_message, timeou
     base_url = config["base_url"]
     driver.get(base_url)
     wait = WebDriverWait(driver, timeout)
+    
+    time.sleep(2)
 
     # 1️⃣ 메시지 전송
     send_test_message("오늘 주요 기사 요약해줘")

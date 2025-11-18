@@ -39,7 +39,8 @@ pipeline {
                 dir("${WORKDIR}") {
                     sh """
                         echo "🧪  pytest 실행"
-                        ${VENV}/bin/python -m pytest -k BILL
+                        ${VENV}/bin/python -m pytest -k BILL \
+                            --junit-xml=reports/all-results.xml \
                     """
                 }
             }

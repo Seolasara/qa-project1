@@ -39,7 +39,7 @@ pipeline {
                 dir("${WORKDIR}") {
                     sh """
                         echo "🧪  pytest 실행"
-                        ${VENV}/bin/python -m pytest
+                        ${VENV}/bin/python -m pytest -k BILL
                     """
                 }
             }

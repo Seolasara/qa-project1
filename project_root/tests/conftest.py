@@ -9,7 +9,6 @@ from src.pages.login_page import LoginPage
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.common.exceptions import InvalidElementStateException
 from src.utils.allure_helper import attach_screenshot
 from src.pages.agent_page import AgentPage
@@ -40,9 +39,15 @@ def driver():
 
     driver = None
     try:
-        # webdriver-manager 사용하면 chromedriver 경로 문제 없음
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                                  options=chrome_options)
+        # chromedriver 경로 직접 지정
+        # 로컬: PATH에 chromedriver가 있으면 Service()만으로도 가능
+        if os.getenv("JENKINS_HOME"):
+            chromedriver_path = "/usr/local/bin/chromedriver"  # Jenkins 환경 chromedriver 경로
+            service = Service(chromedriver_path)
+        else:
+            service = Service()  # 로컬 환경에서 PATH에 chromedriver 있으면 자동 인식
+
+        driver = webdriver.Chrome(service=service, options=chrome_options)
         driver.implicitly_wait(5)
         yield driver
     finally:

@@ -11,7 +11,7 @@ WORKDIR ${WORKDIR}
 
 # --- 4. 시스템 의존성 설치 (Allure CLI용) ---
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk curl unzip && \
+    apt-get install -y openjdk-17-jdk-headless curl unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

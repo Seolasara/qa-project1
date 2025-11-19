@@ -199,18 +199,18 @@ allure serve reports/allure/results
   - **문제**: 전체 테스트를 실행시 간헐적으로 **`TimeExecution`** 에러 발생
   - **해결방법**: **`pytest-rerunfailures`**를 적용, 실패한 테스트를 자동으로 재실행
   - **결과**: 테스트 실패율 **9.23%** 감소
-  - [🔗 불안정 테스트, Rerun으로 안정화](#)
+  - [🔗 불안정 테스트, Rerun으로 안정화](https://kdt-gitlab.elice.io/kanghaelee/team2_project/-/wikis/%EB%B6%88%EC%95%88%EC%A0%95-%ED%85%8C%EC%8A%A4%ED%8A%B8,-Rerun%EC%9C%BC%EB%A1%9C-%EC%95%88%EC%A0%95%ED%99%94%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95)
   <br>
 - **Jenkins 에러 파일 발생**
   - **문제**: Jenkins 실행시 전체에서 Error 파일 28% 발생
   - **해결방법**: conftest.py 파일에 **Headless** 옵션 추가
   - **결과**: Error 파일 전체 비율 **4.6%**까지 감소
-  - [🔗 Jenkins 에러 발생과 Headless 설정으로 해결한 과정](#)
+  - [🔗 Jenkins 에러 발생과 Headless 설정으로 해결한 과정](https://kdt-gitlab.elice.io/kanghaelee/team2_project/-/wikis/Jenkins-%EC%97%90%EB%9F%AC-%EB%B0%9C%EC%83%9D%EC%9D%84-Headless-%EC%84%A4%EC%A0%95%EC%9C%BC%EB%A1%9C-%ED%95%B4%EA%B2%B0%ED%95%9C-%EB%B0%A9%EB%B2%95)
   <br>
 - **DOM 렌더링 타이밍에 따른 StaleElementReferenceException 발생**
   - **문제**: 검색 테스트 실행 시 `find_element()` 가 React 렌더링 완료 이전에 실행되어 `StaleElementReferenceException` 에러 발생
   - **해결방법**: 요소 탐색 전에 대기를 배치하여 DOM 업데이트 시간 확보
   - **결과**: 오류 재현율 100% → 0%로 감소, 테스트 케이스 정상 통과
-  - [🔗 적절한 대기 타이밍과 DOM 렌더링 지연 대응 방법](https://www.notion.so/DOM-2b0990eaa28f80f581f6f4fea2a35a3b?pvs=21)
+  - [🔗 적절한 대기 타이밍과 DOM 렌더링 지연 대응 방법](https://kdt-gitlab.elice.io/kanghaelee/team2_project/-/wikis/%EC%A0%81%EC%A0%88%ED%95%9C-%EB%8C%80%EA%B8%B0-%ED%83%80%EC%9D%B4%EB%B0%8D%EA%B3%BC-DOM-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%A7%80%EC%97%B0-%EB%8C%80%EC%9D%91-%EB%B0%A9%EB%B2%95)
 
 

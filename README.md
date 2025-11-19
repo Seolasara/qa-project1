@@ -189,6 +189,9 @@ allure serve reports/allure/results
 
 ## ▪️서비스 아키텍처
 
+<img src="/uploads/cf6dcaf49bd8c9ad162c45c938097531/제목을_입력해주세요__1_.jpg" width="70%"/>
+
+
 <br>
 
 ## ▪️ 트러블슈팅

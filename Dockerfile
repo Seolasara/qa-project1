@@ -1,25 +1,47 @@
-# --- 1. 베이스 이미지 ---
-FROM eclipse-temurin:17-jdk-jammy
+FROM python:3.10-slim
 
-ENV WORKDIR=/app
-ENV ALLURE_DIR=/app/reports/allure
+# 필수 패키지 설치
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget unzip curl gnupg ca-certificates openjdk-11-jre-headless \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p ${WORKDIR} ${ALLURE_DIR}
-WORKDIR ${WORKDIR}
+# ---------------------------------------------------------
+# 1) Google Chrome 설치
+# ---------------------------------------------------------
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" \
+    > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && apt-get install -y google-chrome-stable
 
-RUN apt-get update && \
-    apt-get install -y python3 python3-venv python3-pip curl unzip git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# ---------------------------------------------------------
+# 2) ChromeDriver 버전 자동 매칭 설치
+# ---------------------------------------------------------
+RUN CHROME_VERSION=$(google-chrome --version | sed -E 's/.* ([0-9]+)\..*/\1/') \
+    && DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}") \
+    && wget -q "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip" \
+    && unzip chromedriver_linux64.zip \
+    && mv chromedriver /usr/local/bin/chromedriver \
+    && chmod +x /usr/local/bin/chromedriver \
+    && rm chromedriver_linux64.zip
 
-RUN curl -o /tmp/allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.27.1/allure-2.27.1.zip && \
-    unzip /tmp/allure.zip -d /opt/ && \
-    ln -s /opt/allure-2.27.1/bin/allure /usr/bin/allure && \
-    rm /tmp/allure.zip
+# ---------------------------------------------------------
+# 3) Allure 설치
+# ---------------------------------------------------------
+RUN wget -qO allure.tgz https://github.com/allure-framework/allure2/releases/latest/download/allure-commandline.tgz \
+    && tar -xzf allure.tgz -C /opt/ \
+    && ln -s /opt/allure-*/bin/allure /usr/bin/allure \
+    && rm allure.tgz
+
+# ---------------------------------------------------------
+# 4) Python 기본 설정
+# ---------------------------------------------------------
+WORKDIR /workspace
 
 COPY requirements.txt .
-RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
 
-COPY project_root/ ./project_root/
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
 
-CMD ["pytest", "project_root/tests", "--alluredir=reports/allure", "--capture=tee-sys", "--junit-xml=reports/all-results.xml"]
+ENV PATH="/workspace/venv/bin:$PATH"
+
+CMD ["bash"]

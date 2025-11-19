@@ -35,7 +35,7 @@ HelpyChat QA 프로젝트는 HelpyChat 서비스의 **핵심 기능 품질을 �
 <br>
 
 <details>
-<summary><strong>Allure 리포트 미리보기</strong></summary>
+<summary><strong>📌 Allure 리포트 미리보기</strong></summary>
 
 <img src="/uploads/e81340c323d1980f7c2b22fe8c0a58ce/스크린샷_2025-11-18_171355.png" width="70%"/>
 
@@ -55,7 +55,7 @@ HelpyChat QA 프로젝트는 HelpyChat 서비스의 **핵심 기능 품질을 �
 테스트 케이스(TC)는 HelpyChat의 핵심 기능 품질을 보증하고,  **정상 동작 검증, 예외 처리, UI/권한/성능 테스트**를 모두 고려하였습니다.
 
 <details>
-<summary><strong>📌 상세보기</strong></summary>
+<summary><strong>📌 자동화 선정 기준 상세보기</strong></summary>
 
 #### 1️⃣ 자동화 가능 여부 3단계
 
@@ -104,7 +104,7 @@ HelpyChat QA 프로젝트는 HelpyChat 서비스의 **핵심 기능 품질을 �
 
 다음은 HelpyChat QA 프로젝트에서 작성한 **대표 테스트 케이스**입니다.
 
-스크린샷으로 확인하거나, 🔗[전체 TC 구글 시트 보기](https://www.notion.so/%EA%B5%AC%EA%B8%80%EC%8B%9C%ED%8A%B8%EB%A7%81%ED%81%AC)에서 자세히 확인할 수 있습니다.
+스크린샷으로 확인하거나, 🔗[전체 TC 구글 시트 보기](https://docs.google.com/spreadsheets/d/1jvFSFtPDwgU6eHVqLnl6Cowe_rB_cDTxe5_iPNAvspA/edit?gid=136598138#gid=136598138)에서 자세히 확인할 수 있습니다.
 
 <img src="/uploads/c3cec26bfad645f1eecb0dec4692ac25/tc_sc.png" width="70%"/>
 

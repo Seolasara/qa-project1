@@ -1,5 +1,5 @@
-# --- 1. 베이스 이미지 ---
-FROM python:3.12-slim
+# --- 1. 베이스 이미지: OpenJDK 17 + slim ---
+FROM openjdk:17-slim
 
 # --- 2. 환경 변수 ---
 ENV WORKDIR=/app
@@ -9,9 +9,9 @@ ENV ALLURE_DIR=/app/reports/allure
 RUN mkdir -p ${WORKDIR} ${ALLURE_DIR}
 WORKDIR ${WORKDIR}
 
-# --- 4. 시스템 의존성 설치 (Allure CLI용) ---
+# --- 4. Python 설치 + 필수 패키지 ---
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk-headless curl unzip && \
+    apt-get install -y python3 python3-venv python3-pip curl unzip git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -23,11 +23,11 @@ RUN curl -o /tmp/allure.zip -L https://github.com/allure-framework/allure2/relea
 
 # --- 6. Python 패키지 설치 ---
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip3 install --upgrade pip && pip3 install -r requirements.txt
 
-# --- 7. 테스트 코드 복사 ---
+# --- 7. 프로젝트 코드 복사 ---
 COPY project_root/ ./project_root/
 
-# --- 8. pytest 실행 예시 ---
-# 컨테이너 실행 시 pytest 실행
+# --- 8. pytest 기본 실행 명령 ---
+# 필요 시 Jenkins에서 CMD를 override 가능
 CMD ["pytest", "project_root/tests", "--alluredir=reports/allure", "--capture=tee-sys", "--junit-xml=reports/all-results.xml"]

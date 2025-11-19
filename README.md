@@ -212,11 +212,13 @@ allure serve reports/allure/results
   - **해결 방법**: 요소 탐색 전에 대기를 배치하여 DOM 업데이트 시간 확보
   - **결과**: 오류 재현율 100% → 0%로 감소, 테스트 케이스 정상 통과
   - [🔗 적절한 대기 타이밍과 DOM 렌더링 지연 대응 방법](https://kdt-gitlab.elice.io/kanghaelee/team2_project/-/wikis/%EC%A0%81%EC%A0%88%ED%95%9C-%EB%8C%80%EA%B8%B0-%ED%83%80%EC%9D%B4%EB%B0%8D%EA%B3%BC-DOM-%EB%A0%8C%EB%8D%94%EB%A7%81-%EC%A7%80%EC%97%B0-%EB%8C%80%EC%9D%91-%EB%B0%A9%EB%B2%95)
+  <br>
 - **기존 pytest-html 리포트를 Allure 리포트로 변경**
   - **문제**: pytest-html 리포트의 낮은 시인성과 제한적인 기능으로 비효율적인 테스트 분석이 이루어짐
   - **해결 방법**: pytest-html 설정 제거 및 Allure 플러그인 적용으로 리포트 생성 방식 전면 전환
   - **결과**: 가독성과 분석 기능이 향상된 Allure 리포트를 안정적으로 생성
   - [🔗 리포트 생성 방식 전환 방법](https://kdt-gitlab.elice.io/kanghaelee/team2_project/-/wikis/%EB%A6%AC%ED%8F%AC%ED%8A%B8-%EC%83%9D%EC%84%B1-%EB%B0%A9%EC%8B%9D-%EC%A0%84%ED%99%98-%EB%B0%A9%EB%B2%95)
+  <br>
 - **Allure 리포트 폴더 내 결과 파일 누적 문제 해결**
   - **문제**: 테스트 실행 시 Allure 결과 파일 및 캐시 누적으로 리포트가 뒤섞이며 폴더의 복잡도가 증가함
   - **해결 방법**: 테스트 실행 전 기존 Allure 결과 디렉토리를 자동 삭제하는 방식으로 폴더를 초기화하도록 변경

@@ -37,13 +37,15 @@ HelpyChat QA 프로젝트는 HelpyChat 서비스의 **핵심 기능 품질을 �
 <details>
 <summary><strong>Allure 리포트 미리보기</strong></summary>
 
-<img src="/uploads/55f9f3f73cca07ceaa629f89be7bc801/스크린샷_2025-11-18_171355.png" width="70%"/>
+<img src="/uploads/e81340c323d1980f7c2b22fe8c0a58ce/스크린샷_2025-11-18_171355.png" width="70%"/>
 
-<br><br>
+<br>
 
-<img src="/uploads/4b68467f304729396accf9231a022cc5/스크린샷_2025-11-18_171342.png" width="70%"/>
+<img src="/uploads/406677cfd02704d2621180da8499888b/스크린샷_2025-11-18_171342.png" width="70%"/>
+
 
 </details>
+
 <br>
 
 ## ▪️ 테스트 케이스 설계
@@ -104,7 +106,7 @@ HelpyChat QA 프로젝트는 HelpyChat 서비스의 **핵심 기능 품질을 �
 
 스크린샷으로 확인하거나, 🔗[전체 TC 구글 시트 보기](https://www.notion.so/%EA%B5%AC%EA%B8%80%EC%8B%9C%ED%8A%B8%EB%A7%81%ED%81%AC)에서 자세히 확인할 수 있습니다.
 
-<img src="/uploads/f039be3218cc351b8f615aba72e44d8a/tc_sc.png" width="70%"/>
+<img src="/uploads/c3cec26bfad645f1eecb0dec4692ac25/tc_sc.png" width="70%"/>
 
 <br><br>
 

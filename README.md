@@ -259,7 +259,8 @@ allure --version
 
 ## ▪️서비스 아키텍처
 
-<img src="/uploads/cf6dcaf49bd8c9ad162c45c938097531/제목을_입력해주세요__1_.jpg" width="70%"/>
+
+![readme용 아키텍처](https://github.com/user-attachments/assets/7480517f-df53-4e91-ac3a-2ae7acb5610b)
 
 
 <br>

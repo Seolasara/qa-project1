@@ -141,4 +141,4 @@ class AgentPage(BasePage):
         image_input = self.wait.until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='file']"))
         )
-        image_input.send_keys(image_path)
+        image_input.send_keys(image_path) 

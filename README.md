@@ -142,16 +142,48 @@ QAespa 테스트를 로컬 환경에서 실행하려면 다음 단계를 따르�
 
 1. **테스트 실행 (master 브랜치)**
 
+▪️window 버전
+
 ```bash
+# 가상환경 설정 
+ python -m venv venv 
+ venv\Scripts\activate
+
+ pip install --upgrade pip
+
+ # requirement 설치
+ pip install -r requirements.txt
+
 # project_root 이동
-cd project_root
+ cd project_root
 
 # 3개의 프로세스로 병렬 실행 (자신의 cpu 스펙의 맞게 갯수를 설정)
-pytest -n 3 
+ pytest -n 3 
 
 # 병렬 실행 없이 전체 실행
-pytest -v
+ pytest -v
 ```
+▪️mac 버전
+```bash
+# 가상환경 설정 
+  python3 -m venv venv 
+  source venv/bin/activate
+
+  pip install --upgrade pip
+
+ # requirement 설치
+  pip install -r requirements.txt
+
+# project_root 이동
+ cd project_root
+
+# 3개의 프로세스로 병렬 실행 (자신의 cpu 스펙의 맞게 갯수를 설정)
+ pytest -n 3 
+
+# 병렬 실행 없이 전체 실행
+ pytest -v
+```
+
 
 2. **Allure 리포트 확인**
 
@@ -162,21 +194,22 @@ allure serve reports/allure/results
 
 <br>
 
-▪️Allure 설치 가이드
-<details> <summary><strong>📘 Allure 설치 가이드</strong></summary> <br>
+<details> <summary><strong>▪️Allure 설치 가이드</strong></summary> <br>
 1️⃣ Python 패키지 설치 (공통)
 pip install pytest allure-pytest
 
 2️⃣ Allure CLI 설치
-🍎 macOS
+▪️macOS
+```bash
 brew install allure
+```
 
-
-✔ 설치 확인
-
+설치 확인
+```bash
 allure --version
+```
 
-🪟 Windows
+▪️Windows
 
 최신 Allure ZIP 다운로드
 👉 https://github.com/allure-framework/allure2/releases
@@ -185,14 +218,16 @@ allure --version
 
 bin 폴더를 환경 변수 PATH에 추가
 예시:
-
+```bash
 C:\allure-2.27.0\bin
-
+```
 
 설치 확인
-
+```bash
 allure --version
+```
 
+<br> </details>
 
 ## ▪️ QAespa 프로젝트 핵심 성과 & 강점
 

@@ -45,6 +45,7 @@ pipeline {
 
                             echo "🧪 pytest 실행 (JUnit + Allure)"
                             ${VENV}/bin/python -m pytest \
+                                -n auto \
                                 --junit-xml=reports/all-results.xml \
                                 --alluredir=${ALLURE_JENKINS}
                         """

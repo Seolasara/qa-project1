@@ -37,22 +37,16 @@ def driver():
     }
     chrome_options.add_experimental_option("prefs", prefs)
 
-    driver = None
+    driver_instance = None
     try:
-        # chromedriver 경로 직접 지정
-        # 로컬: PATH에 chromedriver가 있으면 Service()만으로도 가능
-        if os.getenv("JENKINS_HOME"):
-            chromedriver_path = "/usr/local/bin/chromedriver"  # Jenkins 환경 chromedriver 경로
-            service = Service(chromedriver_path)
-        else:
-            service = Service()  # 로컬 환경에서 PATH에 chromedriver 있으면 자동 인식
-
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        driver.implicitly_wait(5)
-        yield driver
+        # Service 경로 생략 → Selenium Manager가 자동으로 chromedriver 관리
+        service = Service()
+        driver_instance = webdriver.Chrome(service=service, options=chrome_options)
+        driver_instance.implicitly_wait(5)
+        yield driver_instance
     finally:
-        if driver:
-            driver.quit()
+        if driver_instance:
+            driver_instance.quit()
 
 
 @pytest.fixture

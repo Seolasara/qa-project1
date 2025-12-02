@@ -38,6 +38,9 @@ pipeline {
             steps {
                 dir("${WORKDIR}") {
                     sh """
+                        echo "📂 Allure 결과 폴더 생성 (빈 폴더라도 존재)"
+                        mkdir -p reports/allure
+
                         echo "🧪 pytest 실행"
                         ${VENV}/bin/python -m pytest \
                             --junit-xml=reports/all-results.xml \
@@ -77,8 +80,7 @@ pipeline {
             allure([
                 includeProperties: false,
                 results: [[path: "${WORKDIR}/reports/allure"]],
-                commandline: 'Allure',
-                allowEmptyResults: true
+                commandline: 'Allure'
             ])
         }
 

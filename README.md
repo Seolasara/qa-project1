@@ -265,7 +265,7 @@ allure --version
   - **문제**: Jenkins 실행시 전체에서 Error 파일 28% 발생
   - **해결 방법**: conftest.py 파일에 **Headless** 옵션 추가
   - **결과**: Error 파일 전체 비율 **4.6%** 까지 감소
-  - [🔗 Jenkins 에러 발생과 Headless 설정으로 해결한 과정](https://github.com/Seolasara/qa-project1/wiki/Jenkins-%EC%97%90%EB%9F%AC-%EB%B0%9C%EC%83%9D%EC%9D%84-Headless-%EC%84%A4%EC%A0%95%EC%9C%BC%EB%A1%9C-%ED%95%B4%EA%B2%B0%ED%95%9C-%EB%B0%A9%EB%B2%95)
+  - [🔗 Jenkins 환경 의존성 문제를 Headless 옵션으로 해결한 과정](https://github.com/Seolasara/qa-project1/wiki/Jenkins-%ED%99%98%EA%B2%BD-%EC%9D%98%EC%A1%B4%EC%84%B1-%EB%AC%B8%EC%A0%9C%EB%A5%BC-Headless-%EC%98%B5%EC%85%98%EC%9C%BC%EB%A1%9C-%ED%95%B4%EA%B2%B0)
 
 <br>
 
